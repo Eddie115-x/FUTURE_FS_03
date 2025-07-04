@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { FaBars, FaInstagram, FaSpotify, FaTimes, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaAmazon, FaBars, FaFacebook, FaInstagram, FaSpotify, FaTimes, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { SiApplemusic } from 'react-icons/si';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,19 +48,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-charcoal/90 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center font-inter">
         {/* Logo */}
         <Link href="/#home">
           <div className="flex items-center cursor-pointer">
             <Image 
-              src="/capitol-logo.png" 
+              src="/logo.jpg" 
               alt="NF Logo"
               width={50} 
               height={50}
-              className="transition-transform hover:scale-105"
+              className="transition-transform hover:scale-105 rounded"
             />
-            <span className="ml-2 text-xl font-heading text-white">NF</span>
           </div>
         </Link>
 
@@ -78,18 +78,27 @@ const Navbar = () => {
           </div>
 
           {/* Social Icons */}
-          <div className="flex space-x-4">
-            <a href="https://instagram.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
+          <div className="flex items-center space-x-4 bg-[#4B4B45] px-5 py-2 rounded-full">
+            <a href="https://facebook.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+              <FaFacebook size={18} />
+            </a>
+            <a href="https://instagram.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
               <FaInstagram size={18} />
             </a>
-            <a href="https://twitter.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
+            <a href="https://twitter.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
               <FaTwitter size={18} />
             </a>
-            <a href="https://youtube.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
+            <a href="https://youtube.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
               <FaYoutube size={18} />
             </a>
-            <a href="https://open.spotify.com/artist/6fOMl44jA4Sp5b9PpYCkzz" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
+            <a href="https://open.spotify.com/artist/6fOMl44jA4Sp5b9PpYCkzz" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
               <FaSpotify size={18} />
+            </a>
+            <a href="https://music.apple.com/us/artist/nf/1033827908" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+              <SiApplemusic size={18} />
+            </a>
+            <a href="https://music.amazon.com/artists/B00QRC71LI/nf" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+              <FaAmazon size={18} />
             </a>
           </div>
         </div>
@@ -132,18 +141,27 @@ const Navbar = () => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex space-x-8 mt-12">
-          <a href="https://instagram.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
-            <FaInstagram size={24} />
+        <div className="flex items-center space-x-5 mt-12 bg-[#4B4B45] px-6 py-3 rounded-full">
+          <a href="https://facebook.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <FaFacebook size={22} />
           </a>
-          <a href="https://twitter.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
-            <FaTwitter size={24} />
+          <a href="https://instagram.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <FaInstagram size={22} />
           </a>
-          <a href="https://youtube.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
-            <FaYoutube size={24} />
+          <a href="https://twitter.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <FaTwitter size={22} />
           </a>
-          <a href="https://open.spotify.com/artist/6fOMl44jA4Sp5b9PpYCkzz" target="_blank" rel="noopener noreferrer" className="text-silver hover:text-white transition-colors">
-            <FaSpotify size={24} />
+          <a href="https://youtube.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <FaYoutube size={22} />
+          </a>
+          <a href="https://open.spotify.com/artist/6fOMl44jA4Sp5b9PpYCkzz" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <FaSpotify size={22} />
+          </a>
+          <a href="https://music.apple.com/us/artist/nf/1033827908" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <SiApplemusic size={22} />
+          </a>
+          <a href="https://music.amazon.com/artists/B00QRC71LI/nf" target="_blank" rel="noopener noreferrer" className="text-black hover:text-white transition-colors">
+            <FaAmazon size={22} />
           </a>
         </div>
       </div>

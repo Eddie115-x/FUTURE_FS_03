@@ -7,9 +7,153 @@ html {
 }
 
 body {
-  @apply bg-black text-white;
+  @apply bg-obsidian text-ghost font-inter;
 }
 
+/* Film grain effect */
+body::before {
+  content: "";
+  @apply fixed inset-0 bg-grain opacity-5 pointer-events-none z-50;
+  animation: grain 8s steps(10) infinite;
+}
+
+/* Custom NF style abstractions */
+@layer components {
+  .section-title {
+    @apply font-bebas text-4xl md:text-5xl lg:text-6xl mb-4 text-crimson tracking-wider uppercase text-shadow-md;
+  }
+  
+  .section-subtitle {
+    @apply text-silver text-lg max-w-2xl mx-auto font-inter mb-8 tracking-wide;
+  }
+  
+  .btn-primary {
+    @apply bg-crimson text-ghost px-8 py-3 rounded-sm font-medium hover:bg-ghost hover:text-obsidian transition-all duration-300 shadow-crimson-glow;
+  }
+  
+  .btn-secondary {
+    @apply border border-silver text-ghost px-8 py-3 rounded-sm font-medium hover:bg-silver hover:text-obsidian transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply border border-ghost bg-transparent text-ghost px-8 py-3 rounded-sm font-medium hover:bg-ghost/10 transition-all duration-300;
+  }
+  
+  .card {
+    @apply bg-charcoal rounded-md overflow-hidden shadow-lg hover:shadow-crimson-glow transition-shadow duration-300;
+  }
+
+  .card-dark {
+    @apply bg-obsidian border border-charcoal rounded-md overflow-hidden;
+  }
+
+  /* Cinematic text treatments */
+  .cinematic-title {
+    @apply font-bebas text-5xl md:text-7xl lg:text-8xl tracking-ultra uppercase text-ghost;
+    letter-spacing: 0.05em;
+    line-height: 0.9;
+  }
+  
+  /* Content sections with padding */
+  .content-section {
+    @apply py-20 md:py-28 lg:py-36 relative overflow-hidden;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  /* Text fade for overflow */
+  .text-gradient-fade {
+    @apply relative;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animate-delay-600 {
+  animation-delay: 600ms;
+}
+
+/* Reveal effect for text */
+.text-reveal {
+  display: inline-block;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  animation: textReveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation-delay: calc(0.05s * var(--index, 0));
+  transform: translateY(1rem);
+  opacity: 0;
+}
+
+/* Cinematic fade effect for sections */
+.fade-overlay {
+  @apply relative overflow-hidden;
+}
+
+.fade-overlay::after {
+  content: "";
+  @apply absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-obsidian to-transparent z-10;
+}
+
+.cinematic-image {
+  @apply relative overflow-hidden;
+}
+
+.cinematic-image::after {
+  content: "";
+  @apply absolute inset-0 bg-vignette pointer-events-none;
+}
+
+/* Parallax effect */
+.parallax {
+  @apply relative;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 5px rgba(220, 38, 38, 0.7);
+  }
+  
+  .text-glow-white {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+  }
+  
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+}
+
+/* Animation keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -21,6 +165,132 @@ body {
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 1s ease-in-out forwards;
+@keyframes textReveal {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+/* Visual texture effects */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/noise.png');
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Video hover effects */
+.video-card:hover .play-button {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+}
+
+.video-card:hover .video-title {
+  color: #DC2626;
+}
+
+/* Hover link effect */
+.hover-link {
+  position: relative;
+}
+
+.hover-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #DC2626;
+  transition: width 0.3s ease;
+}
+
+.hover-link:hover::after {
+  width: 100%;
+}
+
+/* Split text effect */
+.split-text-container {
+  overflow: hidden;
+}
+
+.split-text {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: revealText 0.8s forwards;
+  animation-delay: calc(var(--delay, 0) * 100ms);
+}
+
+@keyframes revealText {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Marquee effect for text */
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Advanced clip paths */
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+}
+
+.clip-angle {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+  .cinematic-title {
+    @apply text-4xl;
+  }
+  
+  .content-section {
+    @apply py-14;
+  }
 }
