@@ -18,12 +18,20 @@ export default function Home() {
       const targetId = e.currentTarget.getAttribute('href');
       if (targetId && targetId.startsWith('#')) {
         e.preventDefault();
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+        // Handle case where href is just '#' (avoid invalid selector)
+        if (targetId === '#') {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
           });
+        } else {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
         }
       }
     };
@@ -273,91 +281,88 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {/* Video 1 */}
-              <div className="aspect-video relative rounded-md overflow-hidden">
-                <Image
-                  src="https://i.ytimg.com/vi/LJ-HYKpQyb8/maxresdefault.jpg"
-                  alt="HAPPY"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="bg-crimson rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bebas tracking-wide">HAPPY</h3>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Video 1 - HAPPY */}
+              <div className="video-container flex flex-col items-center">
+                <div className="w-full aspect-video relative">
+                  <iframe 
+                    src="https://www.youtube.com/embed/vhumOLNSSJY?si=CstWU8YUL6BoVO4c" 
+                    title="HAPPY" 
+                    frameBorder="0" 
+                    allowFullScreen 
+                    className="w-full aspect-video rounded-lg shadow-lg"
+                  ></iframe>
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl font-bebas tracking-wider text-white">HAPPY</h3>
                 </div>
               </div>
               
-              {/* Video 2 */}
-              <div className="aspect-video relative rounded-md overflow-hidden">
-                <Image
-                  src="https://i.ytimg.com/vi/pOCpfAD0iJA/maxresdefault.jpg"
-                  alt="MOTTO"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="bg-crimson rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bebas tracking-wide">MOTTO</h3>
-                  </div>
+              {/* Video 2 - MOTTO */}
+              <div className="video-container flex flex-col items-center">
+                <div className="w-full aspect-video relative">
+                  <iframe 
+                    src="https://www.youtube.com/embed/0YKOxtOb44c?si=-XHG1y2VxzoSWV8r" 
+                    title="MOTTO" 
+                    frameBorder="0" 
+                    allowFullScreen 
+                    className="w-full aspect-video rounded-lg shadow-lg"
+                  ></iframe>
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl font-bebas tracking-wider text-white">MOTTO</h3>
                 </div>
               </div>
               
-              {/* Video 3 */}
-              <div className="aspect-video relative rounded-md overflow-hidden">
-                <Image
-                  src="https://i.ytimg.com/vi/fibYknUCx-4/maxresdefault.jpg"
-                  alt="CLOUDS"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="bg-crimson rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      </svg>
+              {/* Video 3 - CLOUDS */}
+              <div className="video-container flex flex-col items-center">
+                <div className="w-full aspect-video relative overflow-hidden rounded-lg shadow-lg">
+                  <a 
+                    href="https://youtu.be/fibYknUCIU4?si=SfjtN2Jv7MWNP8Z4" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative w-full h-full"
+                  >
+                    <Image 
+                      src="/video-clouds.jpg" 
+                      alt="CLOUDS" 
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-crimson rounded-full w-14 h-14 flex items-center justify-center shadow-crimson-glow">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        </svg>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bebas tracking-wide">CLOUDS</h3>
-                  </div>
+                  </a>
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl font-bebas tracking-wider text-white">CLOUDS</h3>
                 </div>
               </div>
               
-              {/* Video 4 */}
-              <div className="aspect-video relative rounded-md overflow-hidden">
-                <Image
-                  src="https://i.ytimg.com/vi/fnlJw9H0xAM/maxresdefault.jpg"
-                  alt="THE SEARCH"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="bg-crimson rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bebas tracking-wide">THE SEARCH</h3>
-                  </div>
+              {/* Video 4 - THE SEARCH */}
+              <div className="video-container flex flex-col items-center">
+                <div className="w-full aspect-video relative">
+                  <iframe 
+                    src="https://www.youtube.com/embed/fnlJw9H0xAM?si=kVIqsV5WLKYS4zta" 
+                    title="THE SEARCH" 
+                    frameBorder="0" 
+                    allowFullScreen 
+                    className="w-full aspect-video rounded-lg shadow-lg"
+                  ></iframe>
+                </div>
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl font-bebas tracking-wider text-white">THE SEARCH</h3>
                 </div>
               </div>
             </div>
             
             <div className="text-center mt-8">
               <a 
-                href="https://www.youtube.com/channel/UCoRR6OLuIZ2-79ry4W5I-xw" 
+                href="https://www.youtube.com/@NFVEVO" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-crimson text-white px-6 py-3 rounded-sm inline-flex items-center font-inter"
@@ -555,11 +560,11 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="text-center md:text-right">
+            <div className="text-center">
               <p className="text-silver text-sm mb-2 font-inter">
                 &copy; {new Date().getFullYear()} NF | All Rights Reserved
               </p>
-              <div className="flex space-x-6 justify-center md:justify-end mt-4">
+              <div className="flex space-x-6 justify-center mt-4">
                 <a href="#" className="text-silver hover:text-white text-sm font-inter">Privacy Policy</a>
                 <a href="#" className="text-silver hover:text-white text-sm font-inter">Terms & Conditions</a>
               </div>

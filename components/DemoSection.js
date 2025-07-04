@@ -148,7 +148,7 @@ const DemoSection = () => {
           
           <div className="text-center mt-8">
             <a 
-              href="https://www.youtube.com/channel/UCoRR6OLuIZ2-79ry4W5I-xw" 
+              href="https://www.youtube.com/@NFVEVO" 
               target="_blank" 
               rel="noopener noreferrer"
               className="btn-primary inline-flex items-center"
