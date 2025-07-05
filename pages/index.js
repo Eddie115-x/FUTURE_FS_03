@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FaYoutube } from 'react-icons/fa';
+import EmbedVerification from '../components/EmbedVerification';
+import FileVerification from '../components/FileVerification';
+import VideoDebug from '../components/VideoDebug';
 
 // Import fonts
 import '@fontsource/bebas-neue';
@@ -11,6 +14,40 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/700.css';
 
 export default function Home() {
+  // State to track if video failed to load
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  // Add effect for loading background video
+  useEffect(() => {
+    // Get the video element
+    const videoElement = document.getElementById('bg-video');
+    if (videoElement) {
+      // Force load the video
+      videoElement.load();
+      
+      // Log when video loads or errors
+      videoElement.addEventListener('loadeddata', () => {
+        console.log('Background video loaded successfully');
+        setVideoFailed(false);
+      });
+      
+      videoElement.addEventListener('error', (e) => {
+        console.error('Error loading background video:', e);
+        setVideoFailed(true);
+      });
+      
+      // Set timeout for video loading
+      const timeout = setTimeout(() => {
+        if (videoElement.readyState < 2) {
+          console.warn('Video taking too long to load, showing fallback image');
+          setVideoFailed(true);
+        }
+      }, 5000);
+      
+      return () => clearTimeout(timeout);
+    }
+  }, []);
+
   // Add intersection observer for animation effects
   useEffect(() => {
     // Smooth scrolling navigation
@@ -94,6 +131,10 @@ export default function Home() {
         <meta property="twitter:description" content="Official website for NF. Check out the latest music, videos, tour dates and merchandise." />
         <meta property="twitter:image" content="https://nfrealmusic.com/og-image.jpg" />
       </Head>
+      
+      {/* Debug components */}
+      <VideoDebug videoId="bg-video" />
+      <FileVerification filePath="/nf-loop.mp4" />
 
       {/* 1. Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-charcoal/90 backdrop-blur-sm">
@@ -128,29 +169,31 @@ export default function Home() {
       </nav>
 
       <main className="bg-charcoal text-white">
-        {/* 2. Hero Section */}
-        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16">
-          <div className="absolute inset-0">
-            <Image
-              src="https://res.cloudinary.com/dk-find-out/image/upload/q_80,w_1920,f_auto/DCTM_Penguin_UK_DK_AL526037_wkmzns.jpg"
-              alt="NF - Real Music"
-              fill
-              priority
-              style={{ objectFit: 'cover' }}
-              className="opacity-70"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-charcoal/50 to-charcoal"></div>
-          </div>
+        {/* 2. Hero Section with Background Video */}
+        <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16 overflow-hidden bg-black">
+          {/* Background Video */}
+          <video
+            id="bg-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-100 z-0"
+            poster="/nf-hero.jpg"
+            preload="auto"
+            controls={false}
+          >
+            <source src="/nf-loop.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-charcoal/60 to-charcoal/70 z-0"></div>
           
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <div className="mb-10 flex justify-center">
-              <Image 
-                src="/logo.jpg" 
-                alt="NF Logo" 
-                width={120} 
-                height={120} 
-                className="rounded-md"
-              />
+            <div className="mb-6">
+              <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl tracking-wider text-white mb-3 drop-shadow-xl">NF</h1>
+              <div className="w-20 h-1 bg-crimson mx-auto mb-6"></div>
             </div>
             <p className="text-xl md:text-2xl mb-8 text-silver max-w-xl mx-auto font-inter">
               Cinematic. Honest. Raw. Welcome to the reimagined experience.
@@ -257,16 +300,18 @@ export default function Home() {
             </div>
             
             <div className="max-w-3xl mx-auto h-[380px]">
-              <iframe 
-                src="https://open.spotify.com/embed/artist/6fOMl44jA4Sp5b9PpYCkzz?utm_source=generator" 
-                width="100%" 
-                height="100%" 
-                frameBorder="0" 
-                allowFullScreen 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy"
-                className="rounded-md shadow-lg"
-              ></iframe>
+              <EmbedVerification type="spotify">
+                <iframe 
+                  src="https://open.spotify.com/embed/artist/6fOMl44jA4Sp5b9PpYCkzz?utm_source=generator" 
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0" 
+                  allowFullScreen 
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                  loading="lazy"
+                  className="rounded-md shadow-lg"
+                ></iframe>
+              </EmbedVerification>
             </div>
           </div>
         </section>
@@ -285,13 +330,7 @@ export default function Home() {
               {/* Video 1 - HAPPY */}
               <div className="video-container flex flex-col items-center">
                 <div className="w-full aspect-video relative">
-                  <iframe 
-                    src="https://www.youtube.com/embed/vhumOLNSSJY?si=CstWU8YUL6BoVO4c" 
-                    title="HAPPY" 
-                    frameBorder="0" 
-                    allowFullScreen 
-                    className="w-full aspect-video rounded-lg shadow-lg"
-                  ></iframe>
+                  <EmbedVerification videoId="vhumOLNSSJY" />
                 </div>
                 <div className="mt-4 text-center">
                   <h3 className="text-2xl font-bebas tracking-wider text-white">HAPPY</h3>
@@ -301,13 +340,7 @@ export default function Home() {
               {/* Video 2 - MOTTO */}
               <div className="video-container flex flex-col items-center">
                 <div className="w-full aspect-video relative">
-                  <iframe 
-                    src="https://www.youtube.com/embed/0YKOxtOb44c?si=-XHG1y2VxzoSWV8r" 
-                    title="MOTTO" 
-                    frameBorder="0" 
-                    allowFullScreen 
-                    className="w-full aspect-video rounded-lg shadow-lg"
-                  ></iframe>
+                  <EmbedVerification videoId="0YKOxtOb44c" />
                 </div>
                 <div className="mt-4 text-center">
                   <h3 className="text-2xl font-bebas tracking-wider text-white">MOTTO</h3>
@@ -323,12 +356,14 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="block relative w-full h-full"
                   >
-                    <Image 
-                      src="/video-clouds.jpg" 
-                      alt="CLOUDS" 
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                    />
+                    <div className="absolute inset-0 bg-charcoal">
+                      <Image 
+                        src="https://i.ytimg.com/vi/fibYknUCIU4/maxresdefault.jpg" 
+                        alt="CLOUDS" 
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-500 opacity-80"
+                      />
+                    </div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="bg-crimson rounded-full w-14 h-14 flex items-center justify-center shadow-crimson-glow">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -346,13 +381,7 @@ export default function Home() {
               {/* Video 4 - THE SEARCH */}
               <div className="video-container flex flex-col items-center">
                 <div className="w-full aspect-video relative">
-                  <iframe 
-                    src="https://www.youtube.com/embed/fnlJw9H0xAM?si=kVIqsV5WLKYS4zta" 
-                    title="THE SEARCH" 
-                    frameBorder="0" 
-                    allowFullScreen 
-                    className="w-full aspect-video rounded-lg shadow-lg"
-                  ></iframe>
+                  <EmbedVerification videoId="fnlJw9H0xAM" />
                 </div>
                 <div className="mt-4 text-center">
                   <h3 className="text-2xl font-bebas tracking-wider text-white">THE SEARCH</h3>
