@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { FaYoutube } from 'react-icons/fa';
+import { FaBars, FaTimes, FaYoutube } from 'react-icons/fa';
 import EmbedVerification from '../components/EmbedVerification';
 
 // Import fonts
@@ -11,6 +11,39 @@ import EmbedVerification from '../components/EmbedVerification';
 export default function Home() {
   // State to track if video failed to load
   const [videoFailed, setVideoFailed] = useState(false);
+  
+  // State to control mobile menu
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Close mobile menu when clicking outside or pressing escape
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    
+    const handleClickOutside = (e) => {
+      // Close menu if clicking outside of menu content
+      if (e.target.classList.contains('mobile-menu-overlay')) {
+        setMobileMenuOpen(false);
+      }
+    };
+    
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    
+    // Lock body scroll when menu is open
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Add effect for loading background video
   useEffect(() => {
@@ -130,7 +163,7 @@ export default function Home() {
       </Head>
 
       {/* 1. Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-charcoal/90 backdrop-blur-sm">
+      <nav className="fixed top-0 w-full z-40 bg-charcoal/90 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
             {/* Logo */}
@@ -152,11 +185,54 @@ export default function Home() {
             </div>
             
             {/* Mobile Menu Button */}
-            <button className="md:hidden text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button 
+              className="md:hidden text-parchment focus:outline-none"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+            >
+              {mobileMenuOpen ? (
+                <FaTimes size={24} />
+              ) : (
+                <FaBars size={24} />
+              )}
             </button>
+          </div>
+        </div>
+        
+        {/* Mobile Menu Overlay */}
+        <div 
+          className={`mobile-menu-overlay md:hidden fixed inset-0 bg-charcoal/95 z-50 flex flex-col justify-center items-center transition-all duration-300 ease-in-out ${
+            mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+          }`}
+        >
+          <div className="bg-obsidian p-8 rounded-lg max-w-sm w-full mx-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="absolute top-6 right-6 text-parchment hover:text-crimson transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <FaTimes size={24} />
+            </button>
+            
+            <div className="flex flex-col space-y-8 items-center py-8">
+              {['hero', 'music', 'spotify', 'videos', 'store', 'tour', 'newsletter'].map((item) => (
+                <Link 
+                  key={item} 
+                  href={`#${item}`}
+                  className="font-medium text-xl uppercase font-display text-parchment hover:text-crimson transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item === 'hero' ? 'Home' : item}
+                </Link>
+              ))}
+            </div>
+            
+            {/* Social Icons for Mobile */}
+            <div className="flex items-center justify-center space-x-5 mt-8 bg-stone px-6 py-3 rounded-full">
+              <a href="https://youtube.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-parchment hover:text-gold transition-colors">
+                <FaYoutube size={22} />
+              </a>
+            </div>
           </div>
         </div>
       </nav>
