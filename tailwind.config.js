@@ -8,24 +8,41 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        obsidian: "#0D0D0D",   // Main background, hero sections
-        charcoal: "#1E1E1E",   // Secondary backgrounds, overlays
-        silver: "#A8A29E",     // Subheadings, borders, body text
-        ghost: "#F4F4F5",      // UI contrast, light backgrounds
-        crimson: "#DC2626",    // Accent: buttons, hovers, highlights
-        smoke: "#27272A",      // Subtle darker elements
+        // Core dark tones - maintain the cinematic NF feel
+        obsidian: "#121212",   // Deepest background, slightly softened from pure black
+        charcoal: "#262626",   // Secondary backgrounds, slightly warmer than before
+        
+        // Earth & stone tones - add spiritual depth
+        slate: "#2D3142",      // Deep navy/slate - symbolizes depth and reflection
+        stone: "#48494B",      // Warm stone gray - grounding element
+        clay: "#7C6C77",       // Muted mauve/clay - subtle earth tone with depth
+        
+        // Light tones - symbolize hope and redemption
+        parchment: "#F0EAE0",  // Warm off-white - sacred manuscripts, clean but warm
+        ghost: "#F4F4F5",      // Cool white - maintains contrast for UI elements
+        
+        // Accent colors - represent faith, royalty, sacrifice
+        crimson: "#96343C",    // Deeper, more muted crimson - sacrifice, intensity
+        gold: "#9A7D46",       // Muted gold - subtle royalty, truth, value
+        ember: "#A34730",      // Warm reddish-brown - passion with restraint
+        
+        // Text colors
+        silver: "#A8A8A8",     // Neutral silver for body text
+        
+        // Utility/atmosphere colors
+        smoke: "#2F2F33",      // Subtle darker elements
         ash: "#3F3F46",        // Mid-tone accents
-        ember: "#EF4444",      // Secondary accent
         
         // Base colors for compatibility
-        black: "#0D0D0D",
-        white: "#F4F4F5",
+        black: "#121212",
+        white: "#F0EAE0",
       },
       fontFamily: {
         'sans': ['Inter', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],          // Clean, modern body text
-        'heading': ['Bebas Neue', 'cursive'],
-        'bebas': ['Bebas Neue', 'cursive']         // Bold, raw expression
+        'display': ['"Maven Pro"', 'Inter', 'sans-serif'], // Cinematic, professional display font
+        'heading': ['"Maven Pro"', 'sans-serif'],  // Replaces Bebas Neue with Maven Pro
+        'bebas': ['"Maven Pro"', 'sans-serif']     // For backward compatibility
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',

@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-obsidian text-ghost font-inter;
+  @apply bg-obsidian text-parchment font-inter;
 }
 
 /* Film grain effect */
@@ -18,8 +18,7 @@ body::before {
 }
 
 /* Custom NF style abstractions */
-@layer components {
-  .section-title {
+@layer components {  .section-title {
     @apply font-bebas text-4xl md:text-5xl lg:text-6xl mb-4 text-crimson tracking-wider uppercase text-shadow-md;
   }
   
@@ -28,15 +27,15 @@ body::before {
   }
   
   .btn-primary {
-    @apply bg-crimson text-ghost px-8 py-3 rounded-sm font-medium hover:bg-ghost hover:text-obsidian transition-all duration-300 shadow-crimson-glow;
+    @apply bg-crimson text-parchment px-8 py-3 rounded-sm font-medium hover:bg-parchment hover:text-slate transition-all duration-300 shadow-md;
   }
   
   .btn-secondary {
-    @apply border border-silver text-ghost px-8 py-3 rounded-sm font-medium hover:bg-silver hover:text-obsidian transition-all duration-300;
+    @apply border border-gold text-parchment px-8 py-3 rounded-sm font-medium hover:bg-gold/20 transition-all duration-300;
   }
-
+  
   .btn-outline {
-    @apply border border-ghost bg-transparent text-ghost px-8 py-3 rounded-sm font-medium hover:bg-ghost/10 transition-all duration-300;
+    @apply border border-parchment bg-transparent text-parchment px-8 py-3 rounded-sm font-medium hover:bg-parchment/10 transition-all duration-300;
   }
   
   .card {
@@ -136,15 +135,15 @@ body::before {
   }
   
   .text-glow {
-    text-shadow: 0 0 5px rgba(220, 38, 38, 0.7);
+    text-shadow: 0 0 5px rgba(150, 52, 60, 0.7); /* Using crimson color */
   }
   
   .text-glow-white {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 5px rgba(240, 234, 224, 0.5); /* Using parchment color */
   }
   
   .border-glow {
-    box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+    box-shadow: 0 0 10px rgba(150, 52, 60, 0.5); /* Using crimson color */
   }
   
   .vertical-text {
@@ -210,11 +209,11 @@ body::before {
 /* Video hover effects */
 .video-card:hover .play-button {
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+  box-shadow: 0 0 20px rgba(150, 52, 60, 0.6); /* Using crimson color */
 }
 
 .video-card:hover .video-title {
-  color: #DC2626;
+  color: #96343C; /* Using crimson color */
 }
 
 /* Hover link effect */
@@ -229,7 +228,7 @@ body::before {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #DC2626;
+  background-color: #96343C; /* Using crimson color */
   transition: width 0.3s ease;
 }
 

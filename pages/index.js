@@ -4,14 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FaYoutube } from 'react-icons/fa';
 import EmbedVerification from '../components/EmbedVerification';
-import FileVerification from '../components/FileVerification';
-import VideoDebug from '../components/VideoDebug';
 
 // Import fonts
-import '@fontsource/bebas-neue';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/700.css';
+// Using Google Fonts for both Inter and Maven Pro
 
 export default function Home() {
   // State to track if video failed to load
@@ -115,7 +110,9 @@ export default function Home() {
         <meta name="description" content="Official website for NF. Check out the latest music, videos, tour dates and merchandise from award-winning hip-hop artist NF." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+        {/* Preconnect to improve font loading performance */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
@@ -131,10 +128,6 @@ export default function Home() {
         <meta property="twitter:description" content="Official website for NF. Check out the latest music, videos, tour dates and merchandise." />
         <meta property="twitter:image" content="https://nfrealmusic.com/og-image.jpg" />
       </Head>
-      
-      {/* Debug components */}
-      <VideoDebug videoId="bg-video" />
-      <FileVerification filePath="/nf-loop.mp4" />
 
       {/* 1. Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-charcoal/90 backdrop-blur-sm">
@@ -142,7 +135,7 @@ export default function Home() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="#hero" className="flex items-center">
-              <Image src="/logo.jpg" alt="NF Logo" width={40} height={40} className="rounded" />
+              <Image src="/logo.png" alt="NF Logo" width={40} height={40} className="rounded" />
             </Link>
             
             {/* Desktop Navigation */}
@@ -151,7 +144,7 @@ export default function Home() {
                 <Link 
                   key={item} 
                   href={`#${item}`}
-                  className="text-sm uppercase font-medium text-white hover:text-crimson transition-colors"
+                  className="text-sm uppercase font-medium font-sans text-parchment hover:text-crimson transition-colors"
                 >
                   {item === 'hero' ? 'Home' : item}
                 </Link>
@@ -192,17 +185,17 @@ export default function Home() {
           
           <div className="container mx-auto px-6 relative z-10 text-center">
             <div className="mb-6">
-              <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl tracking-wider text-white mb-3 drop-shadow-xl">NF</h1>
+              <h1 className="font-display text-6xl md:text-8xl lg:text-9xl tracking-widest text-parchment mb-3 drop-shadow-xl">NF</h1>
               <div className="w-20 h-1 bg-crimson mx-auto mb-6"></div>
             </div>
-            <p className="text-xl md:text-2xl mb-8 text-silver max-w-xl mx-auto font-inter">
-              Cinematic. Honest. Raw. Welcome to the reimagined experience.
+            <p className="text-xl md:text-2xl mb-8 text-silver max-w-xl mx-auto font-sans">
+              Real Music Till I die.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="#music" className="bg-crimson text-white px-8 py-3 rounded-sm font-medium hover:bg-white hover:text-black transition-all">
+              <Link href="#music" className="bg-crimson text-parchment px-8 py-3 rounded-sm font-medium font-sans hover:bg-parchment hover:text-slate transition-all">
                 Listen Now
               </Link>
-              <Link href="#tour" className="border border-white text-white px-8 py-3 rounded-sm font-medium hover:bg-white hover:text-black transition-all">
+              <Link href="#tour" className="border border-parchment text-parchment px-8 py-3 rounded-sm font-medium font-sans hover:bg-parchment hover:text-slate transition-all">
                 Tour Dates
               </Link>
             </div>
@@ -213,8 +206,8 @@ export default function Home() {
         <section id="music" className="py-20 bg-charcoal">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="font-bebas text-4xl md:text-5xl mb-4 text-crimson tracking-wide">LATEST MUSIC</h2>
-              <p className="text-silver max-w-2xl mx-auto font-inter">
+              <h2 className="font-display text-4xl md:text-5xl mb-4 text-crimson tracking-wide uppercase">Latest Music</h2>
+              <p className="text-silver max-w-2xl mx-auto font-sans">
                 Stream the latest tracks and albums from NF.
               </p>
             </div>
@@ -224,14 +217,14 @@ export default function Home() {
               <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-square mb-4">
                   <Image
-                    src="https://upload.wikimedia.org/wikipedia/en/1/16/NF_-_Hope.png"
+                    src="/hope.png"
                     alt="NF Album - HOPE"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="rounded-md"
                   />
                 </div>
-                <h3 className="font-bebas text-xl mb-2">HOPE</h3>
+                <h3 className="font-display text-xl mb-2">HOPE</h3>
                 <div className="flex space-x-3 mt-2">
                   <button className="bg-crimson text-white px-4 py-2 rounded-sm font-inter text-sm">
                     Listen Now
@@ -246,14 +239,14 @@ export default function Home() {
               <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-square mb-4">
                   <Image
-                    src="https://upload.wikimedia.org/wikipedia/en/0/06/NF_-_Clouds_%28The_Mixtape%29.png"
+                    src="/clouds.png"
                     alt="NF Album - CLOUDS"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="rounded-md"
                   />
                 </div>
-                <h3 className="font-bebas text-xl mb-2">CLOUDS</h3>
+                <h3 className="font-display text-xl mb-2">CLOUDS</h3>
                 <div className="flex space-x-3 mt-2">
                   <button className="bg-crimson text-white px-4 py-2 rounded-sm font-inter text-sm">
                     Listen Now
@@ -268,14 +261,14 @@ export default function Home() {
               <div className="flex flex-col items-center">
                 <div className="relative w-full aspect-square mb-4">
                   <Image
-                    src="https://upload.wikimedia.org/wikipedia/en/2/29/The_Search_NF_album.jpg"
+                    src="/search.png"
                     alt="NF Album - THE SEARCH"
                     fill
                     style={{ objectFit: 'cover' }}
                     className="rounded-md"
                   />
                 </div>
-                <h3 className="font-bebas text-xl mb-2">THE SEARCH</h3>
+                <h3 className="font-display text-xl mb-2">THE SEARCH</h3>
                 <div className="flex space-x-3 mt-2">
                   <button className="bg-crimson text-white px-4 py-2 rounded-sm font-inter text-sm">
                     Listen Now
@@ -293,8 +286,8 @@ export default function Home() {
         <section id="spotify" className="py-20 bg-charcoal">
           <div className="container mx-auto px-6">
             <div className="text-center mb-10">
-              <h2 className="font-bebas text-4xl md:text-5xl mb-4 text-crimson tracking-wide">STREAM ON SPOTIFY</h2>
-              <p className="text-silver max-w-2xl mx-auto font-inter mb-8">
+              <h2 className="font-display text-4xl md:text-5xl mb-4 text-crimson tracking-wide uppercase">Stream on Spotify</h2>
+              <p className="text-silver max-w-2xl mx-auto font-sans mb-8">
                 Listen to NF's complete discography on Spotify
               </p>
             </div>
@@ -320,8 +313,8 @@ export default function Home() {
         <section id="videos" className="py-20 bg-charcoal">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="font-bebas text-4xl md:text-5xl mb-4 text-crimson tracking-wide">MUSIC VIDEOS</h2>
-              <p className="text-silver max-w-2xl mx-auto font-inter">
+              <h2 className="font-display text-4xl md:text-5xl mb-4 text-crimson tracking-wide uppercase">Music Videos</h2>
+              <p className="text-silver max-w-2xl mx-auto font-sans">
                 Watch the latest music videos
               </p>
             </div>
@@ -333,7 +326,7 @@ export default function Home() {
                   <EmbedVerification videoId="vhumOLNSSJY" />
                 </div>
                 <div className="mt-4 text-center">
-                  <h3 className="text-2xl font-bebas tracking-wider text-white">HAPPY</h3>
+                  <h3 className="text-2xl font-display tracking-wider text-parchment">HAPPY</h3>
                 </div>
               </div>
               
@@ -343,38 +336,17 @@ export default function Home() {
                   <EmbedVerification videoId="0YKOxtOb44c" />
                 </div>
                 <div className="mt-4 text-center">
-                  <h3 className="text-2xl font-bebas tracking-wider text-white">MOTTO</h3>
+                  <h3 className="text-2xl font-display tracking-wider text-parchment">MOTTO</h3>
                 </div>
               </div>
               
               {/* Video 3 - CLOUDS */}
               <div className="video-container flex flex-col items-center">
-                <div className="w-full aspect-video relative overflow-hidden rounded-lg shadow-lg">
-                  <a 
-                    href="https://youtu.be/fibYknUCIU4?si=SfjtN2Jv7MWNP8Z4" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative w-full h-full"
-                  >
-                    <div className="absolute inset-0 bg-charcoal">
-                      <Image 
-                        src="https://i.ytimg.com/vi/fibYknUCIU4/maxresdefault.jpg" 
-                        alt="CLOUDS" 
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-500 opacity-80"
-                      />
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-crimson rounded-full w-14 h-14 flex items-center justify-center shadow-crimson-glow">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </a>
+                <div className="w-full aspect-video relative">
+                  <EmbedVerification videoId="fibYknUCIU4?si=nObmME_PkNv_CPSG" />
                 </div>
                 <div className="mt-4 text-center">
-                  <h3 className="text-2xl font-bebas tracking-wider text-white">CLOUDS</h3>
+                  <h3 className="text-2xl font-display tracking-wider text-parchment">CLOUDS</h3>
                 </div>
               </div>
               
@@ -384,7 +356,7 @@ export default function Home() {
                   <EmbedVerification videoId="fnlJw9H0xAM" />
                 </div>
                 <div className="mt-4 text-center">
-                  <h3 className="text-2xl font-bebas tracking-wider text-white">THE SEARCH</h3>
+                  <h3 className="text-2xl font-display tracking-wider text-parchment">THE SEARCH</h3>
                 </div>
               </div>
             </div>
@@ -394,7 +366,7 @@ export default function Home() {
                 href="https://www.youtube.com/@NFVEVO" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-crimson text-white px-6 py-3 rounded-sm inline-flex items-center font-inter"
+                className="bg-crimson text-parchment px-6 py-3 rounded-sm inline-flex items-center font-sans"
               >
                 <span className="mr-2">YouTube Channel</span>
                 <FaYoutube size={18} />
@@ -407,8 +379,8 @@ export default function Home() {
         <section id="store" className="py-20 bg-charcoal">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="font-bebas text-4xl md:text-5xl mb-4 text-crimson tracking-wide">MERCHANDISE</h2>
-              <p className="text-silver max-w-2xl mx-auto font-inter">
+              <h2 className="font-display text-4xl md:text-5xl mb-4 text-crimson tracking-wide uppercase">Merchandise</h2>
+              <p className="text-silver max-w-2xl mx-auto font-sans">
                 Official NF merchandise
               </p>
             </div>
@@ -418,16 +390,16 @@ export default function Home() {
               <div className="bg-charcoal rounded-md overflow-hidden">
                 <div className="relative aspect-square">
                   <Image
-                    src="https://res.cloudinary.com/teepublic/image/private/s--BiEjqOkq--/t_Resized%20Artwork/c_crop,x_10,y_10/c_fit,w_470/c_crop,g_north_west,h_626,w_470,x_0,y_0/g_north_west,u_upload:v1462829015:production:blanks:mtl53ofohwq5goqjo9ke,x_-395,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1559731994/production/designs/4989983_0.jpg"
+                    src="/nf-hope.png"
                     alt="NF Logo Hoodie"
                     fill
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h3 className="font-bebas text-lg tracking-wide mb-1">NF LOGO HOODIE</h3>
+                  <h3 className="font-display text-lg tracking-wide mb-1">NF HOPE HOODIE</h3>
                   <p className="text-crimson font-medium mb-3">$55.00</p>
-                  <button className="w-full bg-crimson text-white py-2 font-inter text-sm rounded-sm">
+                  <button className="w-full bg-crimson text-parchment py-2 font-sans text-sm rounded-sm">
                     ADD TO CART
                   </button>
                 </div>
@@ -437,16 +409,16 @@ export default function Home() {
               <div className="bg-charcoal rounded-md overflow-hidden">
                 <div className="relative aspect-square">
                   <Image
-                    src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmxhY2slMjB0c2hpcnR8ZW58MHx8MHx8&w=1000&q=80"
+                    src="/RUNNING_CEMENT_TEE_BACK.png"
                     alt="NF Tour Tee"
                     fill
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h3 className="font-bebas text-lg tracking-wide mb-1">HOPE TOUR TEE</h3>
+                  <h3 className="font-display text-lg tracking-wide mb-1">HOPE TOUR TEE</h3>
                   <p className="text-crimson font-medium mb-3">$35.00</p>
-                  <button className="w-full bg-crimson text-white py-2 font-inter text-sm rounded-sm">
+                  <button className="w-full bg-crimson text-parchment py-2 font-sans text-sm rounded-sm">
                     ADD TO CART
                   </button>
                 </div>
@@ -456,16 +428,16 @@ export default function Home() {
               <div className="bg-charcoal rounded-md overflow-hidden">
                 <div className="relative aspect-square">
                   <Image
-                    src="https://images.unsplash.com/photo-1521369909029-2afed882baee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBoYXR8ZW58MHx8MHx8&w=1000&q=80"
+                    src="/hat.png"
                     alt="NF Snapback"
                     fill
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h3 className="font-bebas text-lg tracking-wide mb-1">NF SNAPBACK</h3>
+                  <h3 className="font-display text-lg tracking-wide mb-1">NF SNAPBACK</h3>
                   <p className="text-crimson font-medium mb-3">$30.00</p>
-                  <button className="w-full bg-crimson text-white py-2 font-inter text-sm rounded-sm">
+                  <button className="w-full bg-crimson text-parchment py-2 font-sans text-sm rounded-sm">
                     ADD TO CART
                   </button>
                 </div>
@@ -478,19 +450,19 @@ export default function Home() {
         <section id="tour" className="py-20 bg-charcoal">
           <div className="container mx-auto px-6">
             <div className="text-center mb-12">
-              <h2 className="font-bebas text-4xl md:text-5xl mb-4 text-crimson tracking-wide">TOUR DATES</h2>
-              <p className="text-silver max-w-2xl mx-auto font-inter">
+              <h2 className="font-display text-4xl md:text-5xl mb-4 text-crimson tracking-wide uppercase">Tour Dates</h2>
+              <p className="text-silver max-w-2xl mx-auto font-sans">
                 Stay updated on upcoming shows
               </p>
             </div>
             
             <div className="max-w-2xl mx-auto text-center py-12 px-6 bg-charcoal rounded-md">
-              <h3 className="text-2xl font-bebas mb-4">NO SHOWS CURRENTLY AVAILABLE</h3>
-              <p className="text-silver mb-8 font-inter">
+              <h3 className="text-2xl font-display mb-4 uppercase">No Shows Currently Available</h3>
+              <p className="text-silver mb-8 font-sans">
                 Join our mailing list to be the first to know about upcoming tour dates
               </p>
               
-              <button className="bg-crimson text-white px-8 py-3 rounded-sm font-inter">
+              <button className="bg-crimson text-parchment px-8 py-3 rounded-sm font-sans">
                 GET NOTIFIED
               </button>
             </div>
@@ -502,8 +474,8 @@ export default function Home() {
           <div className="container mx-auto px-6">
             <div className="max-w-2xl mx-auto">
               <div className="text-center mb-10">
-                <h2 className="font-bebas text-4xl md:text-5xl mb-4 text-crimson tracking-wide">JOIN THE NF FAMILY</h2>
-                <p className="text-silver font-inter">
+                <h2 className="font-display text-4xl md:text-5xl mb-4 text-crimson tracking-wide uppercase">Join the NF Family</h2>
+                <p className="text-silver font-sans">
                   Subscribe to get exclusive updates and releases
                 </p>
               </div>
@@ -534,14 +506,14 @@ export default function Home() {
                       className="w-4 h-4 bg-black border border-gray-700 rounded"
                     />
                   </div>
-                  <label className="ml-2 text-sm font-inter text-silver">
+                  <label className="ml-2 text-sm font-sans text-silver">
                     I want to receive news, tour dates, and exclusive content from NF
                   </label>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="w-full bg-crimson text-white py-3 rounded-sm font-medium font-inter"
+                  className="w-full bg-crimson text-parchment py-3 rounded-sm font-medium font-sans"
                 >
                   REGISTER
                 </button>
@@ -557,7 +529,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-col items-center md:items-start gap-6 mb-6 md:mb-0">
               <Image 
-                src="/logo.jpg" 
+                src="/logo.png" 
                 alt="NF Logo" 
                 width={80} 
                 height={40} 
@@ -590,12 +562,12 @@ export default function Home() {
             </div>
             
             <div className="text-center">
-              <p className="text-silver text-sm mb-2 font-inter">
+              <p className="text-silver text-sm mb-2 font-sans">
                 &copy; {new Date().getFullYear()} NF | All Rights Reserved
               </p>
               <div className="flex space-x-6 justify-center mt-4">
-                <a href="#" className="text-silver hover:text-white text-sm font-inter">Privacy Policy</a>
-                <a href="#" className="text-silver hover:text-white text-sm font-inter">Terms & Conditions</a>
+                <a href="#" className="text-silver hover:text-parchment text-sm font-sans">Privacy Policy</a>
+                <a href="#" className="text-silver hover:text-parchment text-sm font-sans">Terms & Conditions</a>
               </div>
             </div>
           </div>
