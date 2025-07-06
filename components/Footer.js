@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaAmazon, FaFacebook, FaInstagram, FaSpotify, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { SiApplemusic } from 'react-icons/si';
 
@@ -12,7 +13,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center mb-4">
-              <img 
+              <Image 
                 src="/logo.png" 
                 alt="NF Logo" 
                 width={60} 

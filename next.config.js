@@ -16,7 +16,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   reactStrictMode: true,
-  swcMinify: true,
+  
   // Allow YouTube and Spotify embeds
   async headers() {
     return [

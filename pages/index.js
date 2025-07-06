@@ -248,7 +248,7 @@ export default function Home() {
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-100 z-0"
-            poster="/nf-hero.jpg"
+            poster="/hope.png"
             preload="auto"
             controls={false}
           >
