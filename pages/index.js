@@ -142,7 +142,7 @@ export default function Home() {
         <title>NF // Real Music</title>
         <meta name="description" content="Official website for NF. Check out the latest music, videos, tour dates and merchandise from award-winning hip-hop artist NF." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
         {/* Preconnect to improve font loading performance */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
