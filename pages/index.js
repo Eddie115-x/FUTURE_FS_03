@@ -201,20 +201,21 @@ export default function Home() {
         
         {/* Mobile Menu Overlay */}
         <div 
-          className={`mobile-menu-overlay md:hidden fixed inset-0 bg-charcoal/95 z-50 flex flex-col justify-center items-center transition-all duration-300 ease-in-out ${
+          className={`mobile-menu-overlay md:hidden fixed inset-0 bg-charcoal/95 z-50 transition-all duration-300 ease-in-out ${
             mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
           }`}
         >
-          <div className="bg-obsidian p-8 rounded-lg max-w-sm w-full mx-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          {/* Menu content wrapper */}
+          <div className="h-full w-full flex flex-col items-center justify-center px-6">
             <button 
-              className="absolute top-6 right-6 text-parchment hover:text-crimson transition-colors"
+              className="absolute top-6 right-6 text-parchment hover:text-crimson transition-colors z-10"
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Close menu"
             >
               <FaTimes size={24} />
             </button>
             
-            <div className="flex flex-col space-y-8 items-center py-8">
+            <div className="flex flex-col space-y-8 items-center w-full max-w-sm mb-12">
               {['hero', 'music', 'spotify', 'videos', 'store', 'tour', 'newsletter'].map((item) => (
                 <Link 
                   key={item} 
@@ -228,7 +229,7 @@ export default function Home() {
             </div>
             
             {/* Social Icons for Mobile */}
-            <div className="flex items-center justify-center space-x-5 mt-8 bg-stone px-6 py-3 rounded-full">
+            <div className="flex items-center justify-center space-x-5 bg-stone px-6 py-3 rounded-full">
               <a href="https://youtube.com/nfrealmusic" target="_blank" rel="noopener noreferrer" className="text-parchment hover:text-gold transition-colors">
                 <FaYoutube size={22} />
               </a>

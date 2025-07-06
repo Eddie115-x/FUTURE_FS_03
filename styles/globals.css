@@ -293,4 +293,11 @@ body::before {
     @apply py-14;
   }
 }
-  
+
+/* Header styling */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;  
+  width: 100%;
+}
